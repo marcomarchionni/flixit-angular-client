@@ -22,7 +22,7 @@ const apiUrl = 'https://itflix-api.herokuapp.com/';
 @Injectable({
   providedIn: 'root',
 })
-export class UserRegistrationService {
+export class FetchApiDataService {
   // Inject HttpClient in the constructor
   constructor(private http: HttpClient) {}
 
