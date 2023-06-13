@@ -10,9 +10,11 @@ import { catchError, map } from 'rxjs/operators';
 import {
   Director,
   Genre,
+  LoginResponse,
   Movie,
   User,
   UserDetails,
+  UserLogin,
   UserUpdate,
 } from './interfaces';
 
@@ -27,19 +29,22 @@ export class FetchApiDataService {
   constructor(private http: HttpClient) {}
 
   signupUser(userDetails: UserDetails): Observable<any> {
-    console.log(userDetails);
     return this.http
       .post<User>(apiUrl + 'users', userDetails)
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  loginUser(username: string, password: string): Observable<any> {
+  loginUser(userLogin: UserLogin): Observable<any> {
     const params = new HttpParams()
-      .set('username', username)
-      .set('password', password);
-    return this.http
-      .post<User>(apiUrl + 'login', {}, { params })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
+      .set('username', userLogin.username)
+      .set('password', userLogin.password);
+    return this.http.post<LoginResponse>(apiUrl + 'login', {}, { params }).pipe(
+      map((res) => {
+        if (!res.user || !res.token) throwError;
+        return res;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   getAllMovies(): Observable<any> {
@@ -119,14 +124,21 @@ export class FetchApiDataService {
   }
 
   private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-      console.error('Some error occurred:', error.error.message);
+    let message: string;
+    let status: string;
+    console.log(error);
+    if (error.error && error.error.status && error.error.message) {
+      status = `${error.error.status}`;
+      message = error.error.message;
+    } else if (error.status && error.message) {
+      status = `${error.status}`;
+      message = error.message;
     } else {
-      console.error(
-        `Error Status Code ${error.status},` + `Error Body is: ${error.error}`
-      );
+      status = '---';
+      message = 'Unknown error';
     }
-    return throwError(() => new Error('Something bad happened, try later'));
+    console.error(`Error Status: ${status},` + `Error message: ${message}`);
+    return throwError(() => new Error(message));
   }
 
   private getAuthHeaders() {
@@ -139,6 +151,7 @@ export class FetchApiDataService {
   }
 
   private extractResponseData(res: any): any {
-    return res || {};
+    console.log(res);
+    return res;
   }
 }

@@ -28,16 +28,17 @@ export class UserRegistrationFormComponent {
   registerUser(): void {
     this.fetchApiData.signupUser(this.userData).subscribe(
       (response) => {
-        // logic for user registration
-        this.dialogRef.close(); // Close the modal on success
         console.log(response);
+        // TODO: logic for user registration
+        // Close the modal on success
+        this.dialogRef.close();
         this.snackBar.open('User registration successful!', 'OK', {
           duration: 2000,
         });
       },
-      (response) => {
-        console.log(response);
-        this.snackBar.open(response, 'OK', { duration: 2000 });
+      (error) => {
+        console.log(error);
+        this.snackBar.open(error, 'OK', { duration: 5000 });
       }
     );
   }

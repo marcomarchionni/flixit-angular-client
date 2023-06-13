@@ -34,7 +34,12 @@ export interface UserDetails {
   username: string;
   email: string;
   password: string;
-  birthday: string;
+  birthday?: string;
+}
+
+export interface UserLogin {
+  username: string;
+  password: string;
 }
 
 export interface User extends UserDetails {
@@ -46,6 +51,11 @@ export interface UserUpdate {
   email?: string;
   password?: string;
   birthday?: string;
+}
+
+export interface LoginResponse {
+  token: string;
+  user: User;
 }
 
 export interface ErrorResponse {

@@ -1,4 +1,4 @@
-<div class="main-page">
+<div style="width: 50%; margin: auto; text-align: center; padding-top: 2rem">
   <h1>Welcome to FlixIt app</h1>
   <button
     mat-raised-button
@@ -8,5 +8,7 @@
   >
     Sign Up
   </button>
-  <button mat-raised-button color="primary">Login</button>
+  <button mat-raised-button (click)="openLoginDialog()" color="primary">
+    Login
+  </button>
 </div>
