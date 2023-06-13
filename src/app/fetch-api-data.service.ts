@@ -143,6 +143,7 @@ export class FetchApiDataService {
 
   private getAuthHeaders() {
     const token = localStorage.getItem('token');
+    if (!token) throwError(() => new Error('No token'));
     return {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
