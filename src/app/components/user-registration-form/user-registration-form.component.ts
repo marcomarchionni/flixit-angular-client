@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FetchApiDataService } from '../fetch-api-data.service';
-import { UserDetails } from '../interfaces';
+import { FetchApiDataService } from '../../services/fetch-api-data.service';
+import { UserDetails } from '../../common/interfaces';
 
 @Component({
   selector: 'app-user-registration-form',

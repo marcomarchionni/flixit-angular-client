@@ -16,7 +16,7 @@ import {
   UserDetails,
   UserLogin,
   UserUpdate,
-} from './interfaces';
+} from '../common/interfaces';
 
 // Declaring the API url
 const apiUrl = 'https://itflix-api.herokuapp.com/';

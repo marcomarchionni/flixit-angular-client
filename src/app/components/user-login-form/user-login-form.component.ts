@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { LoginResponse, UserLogin } from '../interfaces';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { LoginResponse, UserLogin } from '../../common/interfaces';
+import { FetchApiDataService } from '../../services/fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';

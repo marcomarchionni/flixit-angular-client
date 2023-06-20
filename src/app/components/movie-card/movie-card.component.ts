@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Movie } from '../interfaces';
-import { FetchApiDataService } from '../fetch-api-data.service';
+import { Movie } from '../../common/interfaces';
+import { FetchApiDataService } from '../../services/fetch-api-data.service';
 
 @Component({
   selector: 'app-movie-card',
