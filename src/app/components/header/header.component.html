@@ -5,6 +5,11 @@
     <button *ngIf="isLoggedIn$ | async" mat-flat-button>
       {{ username$ | async }}
     </button>
-    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button>Login</button>
+    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary">
+      Login
+    </button>
+    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary">
+      Signup
+    </button>
   </mat-toolbar>
 </header>

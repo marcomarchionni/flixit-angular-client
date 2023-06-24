@@ -13,7 +13,7 @@
 // hue. Available color palettes: https://material.io/design/color/
 $flixit-angular-client-primary: mat.define-palette(mat.$grey-palette);
 $flixit-angular-client-accent: mat.define-palette(
-  mat.$pink-palette,
+  mat.$orange-palette,
   A200,
   A100,
   A400
@@ -24,7 +24,7 @@ $flixit-angular-client-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$flixit-angular-client-theme: mat.define-light-theme(
+$flixit-angular-client-theme: mat.define-dark-theme(
   (
     color: (
       primary: $flixit-angular-client-primary,
