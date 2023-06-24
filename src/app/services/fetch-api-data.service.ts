@@ -14,7 +14,7 @@ import {
   Movie,
   User,
   UserDetails,
-  UserLogin,
+  LoginCredentials,
   UserUpdate,
 } from '../common/interfaces';
 
@@ -34,7 +34,7 @@ export class FetchApiDataService {
       .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
 
-  loginUser(userLogin: UserLogin): Observable<any> {
+  loginUser(userLogin: LoginCredentials): Observable<any> {
     const params = new HttpParams()
       .set('username', userLogin.username)
       .set('password', userLogin.password);

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { Movie } from '../../common/interfaces';
-import { FetchApiDataService } from '../../services/fetch-api-data.service';
+import { Component, Input } from '@angular/core';
+import { Movie } from 'src/app/common/interfaces';
 
 @Component({
   selector: 'app-movie-card',
@@ -8,18 +7,5 @@ import { FetchApiDataService } from '../../services/fetch-api-data.service';
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent {
-  movies: Movie[] = [];
-
-  constructor(public fetchApiData: FetchApiDataService) {}
-
-  ngOnInit() {
-    this.getMovies();
-  }
-
-  getMovies() {
-    this.fetchApiData.getAllMovies().subscribe((data) => {
-      this.movies = data;
-      console.log(this.movies);
-    });
-  }
+  @Input() movie: Movie | undefined;
 }

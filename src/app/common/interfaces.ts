@@ -37,7 +37,7 @@ export interface UserDetails {
   birthday?: string;
 }
 
-export interface UserLogin {
+export interface LoginCredentials {
   username: string;
   password: string;
 }

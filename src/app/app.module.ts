@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -14,16 +15,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserRegistrationFormComponent } from './components/user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './components/user-login-form/user-login-form.component';
-import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { MovieGridComponent } from './components/movie-grid/movie-grid.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './components/header/header.component';
+import { MovieCardComponent } from './components/movie-card/movie-card.component';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
-  { path: 'movies', component: MovieCardComponent },
+  { path: 'movies', component: MovieGridComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -32,9 +34,10 @@ const appRoutes: Routes = [
     AppComponent,
     UserRegistrationFormComponent,
     UserLoginFormComponent,
-    MovieCardComponent,
+    MovieGridComponent,
     WelcomePageComponent,
     HeaderComponent,
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
+    MatGridListModule,
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,

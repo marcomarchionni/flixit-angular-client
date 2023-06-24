@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { LoginResponse, UserLogin } from '../../common/interfaces';
+import { LoginResponse, LoginCredentials } from '../../common/interfaces';
 import { FetchApiDataService } from '../../services/fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-login-form',
@@ -11,12 +12,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent {
-  @Input() userData: UserLogin = {
+  @Input() userData: LoginCredentials = {
     username: '',
     password: '',
   };
 
   constructor(
+    private userService: UserService,
     public fetchApiData: FetchApiDataService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
@@ -26,13 +28,9 @@ export class UserLoginFormComponent {
   ngOnInit(): void {}
 
   loginUser() {
-    this.fetchApiData.loginUser(this.userData).subscribe(
-      (response: LoginResponse) => {
+    this.userService.login(this.userData).subscribe({
+      next: (response: LoginResponse) => {
         console.log(response);
-
-        //save to local storage
-        localStorage.setItem('user', JSON.stringify(response.user));
-        localStorage.setItem('token', response.token);
 
         // close dialog
         this.dialogRef.close();
@@ -41,10 +39,10 @@ export class UserLoginFormComponent {
         });
         this.router.navigate(['movies']);
       },
-      (error) => {
+      error: (error) => {
         console.log(error);
         this.snackBar.open(error, 'OK', { duration: 5000 });
-      }
-    );
+      },
+    });
   }
 }

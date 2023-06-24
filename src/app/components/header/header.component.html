@@ -2,6 +2,9 @@
   <mat-toolbar>
     <img src="assets/images/flixit-logo.png" width="100" />
     <span class="spacer"></span>
-    <button mat-flat-button>Username</button>
+    <button *ngIf="isLoggedIn$ | async" mat-flat-button>
+      {{ username$ | async }}
+    </button>
+    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button>Login</button>
   </mat-toolbar>
 </header>

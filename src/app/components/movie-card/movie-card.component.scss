@@ -1,0 +1,16 @@
+.movie-card {
+  height: 100%;
+}
+
+.movie-card__title {
+  text-align: center;
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+mat-card-actions {
+  justify-content: space-evenly;
+}
