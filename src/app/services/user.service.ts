@@ -8,17 +8,9 @@ import {
   LoginCredentials,
   UserUpdate,
 } from '../common/interfaces';
-import {
-  BehaviorSubject,
-  Observable,
-  catchError,
-  map,
-  tap,
-  throwError,
-} from 'rxjs';
+import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { apiUrl } from '../common/constants';
 import { ErrorHandling } from '../errors/error-handling';
-import { SanityChecks } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -74,6 +66,10 @@ export class UserService {
     return this.http
       .post<User>(apiUrl + 'users', userDetails)
       .pipe(catchError(this.err.handleError));
+  }
+
+  getFavouritesIds() {
+    return this._user$.pipe(map((user) => (user ? user.favouriteMovies : [])));
   }
 
   addMovieToFavourites(movie: Movie): Observable<any> {

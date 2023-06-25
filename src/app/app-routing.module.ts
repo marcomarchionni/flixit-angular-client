@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
-import { MovieGridComponent } from './components/movie-grid/movie-grid.component';
 import { loggedInGuard } from './guards/logged-in.guard';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { loggedOutGuard } from './guards/logged-out.guard';
+import { MoviesPageComponent } from './components/movies-page/movies-page.component';
+import { FavouritesPageComponent } from './components/favourites-page/favourites-page.component';
 
 const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomePageComponent },
   {
     path: 'login',
     component: LoginPageComponent,
@@ -21,7 +20,12 @@ const appRoutes: Routes = [
   },
   {
     path: 'movies',
-    component: MovieGridComponent,
+    component: MoviesPageComponent,
+    canActivate: [loggedInGuard],
+  },
+  {
+    path: 'favourites',
+    component: FavouritesPageComponent,
     canActivate: [loggedInGuard],
   },
   { path: '', redirectTo: 'movies', pathMatch: 'prefix' },

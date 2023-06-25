@@ -25,8 +25,9 @@
     >
       {{ username$ | async }}
     </button>
-    <mat-menu #menu="matMenu"
-      ><button mat-menu-item (click)="logout()">Logout</button></mat-menu
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item routerLink="/favourites">Favourites</button>
+      <button mat-menu-item (click)="logout()">Logout</button></mat-menu
     >
   </mat-toolbar>
 </header>

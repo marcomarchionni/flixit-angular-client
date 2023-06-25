@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FetchApiDataService } from './fetch-api-data.service';
+import { FavouriteService } from './favourite.service';
 
-describe('FetchApiDataService', () => {
-  let service: FetchApiDataService;
+describe('FavouriteService', () => {
+  let service: FavouriteService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FetchApiDataService);
+    service = TestBed.inject(FavouriteService);
   });
 
   it('should be created', () => {

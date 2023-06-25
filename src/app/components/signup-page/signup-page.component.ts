@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FetchApiDataService } from '../../services/fetch-api-data.service';
+import { MovieService } from '../../services/movie.service';
 import { UserDetails } from '../../common/interfaces';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup-page',
@@ -23,28 +24,23 @@ export class SignupPageComponent {
     birthday: new FormControl(''),
   });
 
-  constructor(
-    public fetchApiData: FetchApiDataService,
-    public snackBar: MatSnackBar
-  ) {}
+  constructor(public userService: UserService, public snackBar: MatSnackBar) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.fetchApiData
-      .signupUser(this.signupForm.value as UserDetails)
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          // TODO: logic for user registration
-          this.snackBar.open('User registration successful!', 'OK', {
-            duration: 2000,
-          });
-        },
-        error: (error) => {
-          console.log(error);
-          this.snackBar.open(error, 'OK', { duration: 5000 });
-        },
-      });
+    this.userService.signup(this.signupForm.value as UserDetails).subscribe({
+      next: (response) => {
+        console.log(response);
+        // TODO: logic for user registration
+        this.snackBar.open('User registration successful!', 'OK', {
+          duration: 2000,
+        });
+      },
+      error: (error) => {
+        console.log(error);
+        this.snackBar.open(error, 'OK', { duration: 5000 });
+      },
+    });
   }
 }

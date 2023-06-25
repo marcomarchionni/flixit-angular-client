@@ -16,13 +16,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SignupPageComponent } from './components/signup-page/signup-page.component';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MovieGridComponent } from './components/movie-grid/movie-grid.component';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './components/header/header.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
+import { MoviesPageComponent } from './components/movies-page/movies-page.component';
+import { FavouritesPageComponent } from './components/favourites-page/favourites-page.component';
+import { MovieService } from './services/movie.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +33,10 @@ import { MatMenuModule } from '@angular/material/menu';
     SignupPageComponent,
     LoginPageComponent,
     MovieGridComponent,
-    WelcomePageComponent,
     HeaderComponent,
     MovieCardComponent,
+    MoviesPageComponent,
+    FavouritesPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,7 @@ import { MatMenuModule } from '@angular/material/menu';
     MatToolbarModule,
     MatMenuModule,
   ],
-  providers: [],
+  providers: [MovieService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
