@@ -13,27 +13,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { UserRegistrationFormComponent } from './components/user-registration-form/user-registration-form.component';
-import { UserLoginFormComponent } from './components/user-login-form/user-login-form.component';
+import { SignupPageComponent } from './components/signup-page/signup-page.component';
+import { LoginPageComponent } from './components/login-page/login-page.component';
 import { MovieGridComponent } from './components/movie-grid/movie-grid.component';
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
-import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HeaderComponent } from './components/header/header.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
-
-const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomePageComponent },
-  { path: 'movies', component: MovieGridComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-];
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserRegistrationFormComponent,
-    UserLoginFormComponent,
+    SignupPageComponent,
+    LoginPageComponent,
     MovieGridComponent,
     WelcomePageComponent,
     HeaderComponent,
@@ -42,10 +37,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
     MatInputModule,
     MatButtonModule,
@@ -55,6 +50,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatIconModule,
     MatToolbarModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

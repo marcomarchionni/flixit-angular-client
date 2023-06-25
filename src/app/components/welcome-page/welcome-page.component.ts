@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
-import { UserLoginFormComponent } from '../user-login-form/user-login-form.component';
+import { SignupPageComponent } from '../signup-page/signup-page.component';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 @Component({
   selector: 'app-welcome-page',
@@ -14,10 +14,10 @@ export class WelcomePageComponent implements OnInit {
   ngOnInit(): void {}
 
   openUserRegistrationDialog() {
-    this.dialog.open(UserRegistrationFormComponent, { width: '280px' });
+    this.dialog.open(SignupPageComponent, { width: '280px' });
   }
 
   openUserLoginDialog() {
-    this.dialog.open(UserLoginFormComponent, { width: '280px' });
+    this.dialog.open(LoginPageComponent, { width: '280px' });
   }
 }

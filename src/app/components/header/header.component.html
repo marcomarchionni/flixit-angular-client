@@ -2,14 +2,15 @@
   <mat-toolbar>
     <img src="assets/images/flixit-logo.png" width="100" />
     <span class="spacer"></span>
-    <button *ngIf="isLoggedIn$ | async" mat-flat-button>
+    <button
+      *ngIf="isLoggedIn$ | async"
+      mat-flat-button
+      [matMenuTriggerFor]="menu"
+    >
       {{ username$ | async }}
     </button>
-    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary">
-      Login
-    </button>
-    <button *ngIf="!(isLoggedIn$ | async)" mat-flat-button color="primary">
-      Signup
-    </button>
+    <mat-menu #menu="matMenu"
+      ><button mat-menu-item (click)="logout()">Logout</button></mat-menu
+    >
   </mat-toolbar>
 </header>

@@ -5,11 +5,11 @@ import { FetchApiDataService } from '../../services/fetch-api-data.service';
 import { UserDetails } from '../../common/interfaces';
 
 @Component({
-  selector: 'app-user-registration-form',
-  templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.scss'],
+  selector: 'app-signup-page',
+  templateUrl: './signup-page.component.html',
+  styleUrls: ['./signup-page.component.scss'],
 })
-export class UserRegistrationFormComponent {
+export class SignupPageComponent {
   @Input() userData: UserDetails = {
     username: '',
     password: '',
@@ -19,7 +19,7 @@ export class UserRegistrationFormComponent {
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
+    public dialogRef: MatDialogRef<SignupPageComponent>,
     public snackBar: MatSnackBar
   ) {}
 

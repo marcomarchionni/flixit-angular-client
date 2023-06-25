@@ -22,16 +22,18 @@ import { ErrorHandling } from '../errors/error-handling';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService implements OnInit {
+export class UserService {
   private _user$ = new BehaviorSubject<User | null>(null);
 
-  get user$(): Observable<any> {
+  get user$(): Observable<User | null> {
     return this._user$.asObservable();
   }
 
-  constructor(private http: HttpClient, private err: ErrorHandling) {}
+  constructor(private http: HttpClient, private err: ErrorHandling) {
+    this.init();
+  }
 
-  ngOnInit(): void {
+  init(): void {
     const stringifiedUser = localStorage.getItem('user');
     if (stringifiedUser) {
       this._user$.next(JSON.parse(stringifiedUser));
@@ -79,6 +81,10 @@ export class UserService implements OnInit {
       .pipe(catchError(this.err.handleError));
   }
 
+  isLoggedIn() {
+    return this._user$.pipe(map((user) => !!user));
+  }
+
   // updateUser(userUpdate: UserUpdate): Observable<any> {
   //   const encodedUsername = encodeURIComponent(this.getUser().username);
   //   const updateUserUrl = `${apiUrl}users/${encodedUsername}`;
@@ -94,10 +100,6 @@ export class UserService implements OnInit {
   //     .delete<User>(deleteUserUrl, this.getAuthHeaders())
   //     .pipe(catchError(this.err.handleError));
   // }
-
-  isLoggedIn() {
-    return !!this._user$.value;
-  }
 
   private getFavouritesUrl(movieId: string) {
     const user = this._user$.value;
