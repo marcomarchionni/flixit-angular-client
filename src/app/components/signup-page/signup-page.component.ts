@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../../services/fetch-api-data.service';
 import { UserDetails } from '../../common/interfaces';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signup-page',
@@ -10,36 +10,41 @@ import { UserDetails } from '../../common/interfaces';
   styleUrls: ['./signup-page.component.scss'],
 })
 export class SignupPageComponent {
-  @Input() userData: UserDetails = {
-    username: '',
-    password: '',
-    email: '',
-    birthday: '',
-  };
+  signupForm = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4),
+    ]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    birthday: new FormControl(''),
+  });
 
   constructor(
     public fetchApiData: FetchApiDataService,
-    public dialogRef: MatDialogRef<SignupPageComponent>,
     public snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
 
-  registerUser(): void {
-    this.fetchApiData.signupUser(this.userData).subscribe(
-      (response) => {
-        console.log(response);
-        // TODO: logic for user registration
-        // Close the modal on success
-        this.dialogRef.close();
-        this.snackBar.open('User registration successful!', 'OK', {
-          duration: 2000,
-        });
-      },
-      (error) => {
-        console.log(error);
-        this.snackBar.open(error, 'OK', { duration: 5000 });
-      }
-    );
+  onSubmit(): void {
+    this.fetchApiData
+      .signupUser(this.signupForm.value as UserDetails)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          // TODO: logic for user registration
+          this.snackBar.open('User registration successful!', 'OK', {
+            duration: 2000,
+          });
+        },
+        error: (error) => {
+          console.log(error);
+          this.snackBar.open(error, 'OK', { duration: 5000 });
+        },
+      });
   }
 }

@@ -1,54 +1,50 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Sign Up!</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <form>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="userData.username"
-          placeholder="Username"
-          type="text"
-          name="Username"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="userData.password"
-          placeholder="Password"
-          type="password"
-          name="Password"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="userData.email"
-          placeholder="Email"
-          type="email"
-          name="Email"
-          required
-        />
-      </mat-form-field>
-      <mat-form-field>
-        <input
-          matInput
-          [(ngModel)]="userData.birthday"
-          placeholder="Birthday"
-          type="date"
-          name="Birthday"
-          required
-        />
-      </mat-form-field>
-    </form>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button (click)="registerUser()" color="primary">
-      Sign Up
-    </button>
-  </mat-card-actions>
-</mat-card>
+<div class="form-container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <mat-card class="form-card">
+      <mat-card-header>
+        <mat-card-title><h2>Sign Up</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-form-field class="form-field">
+          <input
+            matInput
+            formControlName="username"
+            placeholder="Username"
+            type="text"
+            name="Username"
+          />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input
+            matInput
+            formControlName="password"
+            placeholder="Password"
+            type="password"
+            name="Password"
+          />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input
+            matInput
+            formControlName="email"
+            placeholder="Email"
+            type="email"
+            name="Email"
+          />
+        </mat-form-field>
+        <mat-form-field class="form-field">
+          <input
+            matInput
+            formControlName="birthday"
+            placeholder="Birthday"
+            type="date"
+            name="Birthday"
+          />
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button type="submit" color="primary">Sign Up</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>

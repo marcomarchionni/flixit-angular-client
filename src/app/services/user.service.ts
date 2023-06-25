@@ -18,6 +18,8 @@ import {
 } from 'rxjs';
 import { apiUrl } from '../common/constants';
 import { ErrorHandling } from '../errors/error-handling';
+import { SanityChecks } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +31,11 @@ export class UserService {
     return this._user$.asObservable();
   }
 
-  constructor(private http: HttpClient, private err: ErrorHandling) {
+  constructor(
+    private http: HttpClient,
+    private err: ErrorHandling,
+    private snackBar: MatSnackBar
+  ) {
     this.init();
   }
 
@@ -59,6 +65,9 @@ export class UserService {
     this._user$.next(null);
     localStorage.removeItem('user');
     localStorage.removeItem('token');
+    this.snackBar.open("You've been signed out", 'OK', {
+      duration: 5000,
+    });
   }
 
   signup(userDetails: UserDetails): Observable<any> {

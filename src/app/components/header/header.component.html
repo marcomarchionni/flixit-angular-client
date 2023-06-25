@@ -1,10 +1,26 @@
 <header class="header">
   <mat-toolbar>
-    <img src="assets/images/flixit-logo.png" width="100" />
+    <a routerLink="/movies"
+      ><img src="assets/images/flixit-logo.png" width="100"
+    /></a>
     <span class="spacer"></span>
+    <div *ngIf="!(isLoggedIn$ | async)">
+      <button
+        class="first-button"
+        mat-flat-button
+        color="accent"
+        routerLink="/login"
+      >
+        Login
+      </button>
+      <button mat-flat-button color="accent" routerLink="/signup">
+        Sign up
+      </button>
+    </div>
     <button
       *ngIf="isLoggedIn$ | async"
       mat-flat-button
+      color="accent"
       [matMenuTriggerFor]="menu"
     >
       {{ username$ | async }}

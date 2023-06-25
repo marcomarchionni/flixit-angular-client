@@ -1,0 +1,17 @@
+@use "../../../styles.scss";
+
+@mixin form-container {
+  padding: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+@mixin form-card {
+  width: 300px;
+  align-items: center;
+  padding-bottom: 0.5rem;
+}
+
+@mixin form-field {
+  display: flex;
+}
