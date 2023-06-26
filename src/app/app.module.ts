@@ -26,6 +26,8 @@ import { MoviesPageComponent } from './components/movies-page/movies-page.compon
 import { FavouritesPageComponent } from './components/favourites-page/favourites-page.component';
 import { MovieService } from './services/movie.service';
 import { UserService } from './services/user.service';
+import { StateService } from './services/state.service';
+import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import { UserService } from './services/user.service';
     MatToolbarModule,
     MatMenuModule,
   ],
-  providers: [MovieService, UserService],
+  providers: [MovieService, UserService, StateService, ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

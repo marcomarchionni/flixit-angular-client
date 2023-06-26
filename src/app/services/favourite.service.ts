@@ -1,24 +1,35 @@
 import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
+import {
+  Observable,
+  catchError,
+  combineLatest,
+  map,
+  of,
+  startWith,
+  switchMap,
+  tap,
+} from 'rxjs';
+import { FavouriteIcon, Movie } from '../common/interfaces';
+import { ErrorHandling } from '../errors/error-handling';
 import { MovieService } from './movie.service';
-import { FavouriteIcon, Movie, User } from '../common/interfaces';
-import { Observable, combineLatest, map, of, startWith, switchMap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from './api.service';
+import { StateService } from './state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavouriteService {
   constructor(
-    private userService: UserService,
+    private userStateService: StateService,
     private movieService: MovieService,
-    private http: HttpClient
+    private userApiService: ApiService,
+    private err: ErrorHandling
   ) {}
 
   getFavoriteMovies(): Observable<Movie[]> {
     return combineLatest([
       this.movieService.getMovies(),
-      this.userService.getFavouritesIds(),
+      this.userStateService.getFavouriteIds(),
     ]).pipe(
       switchMap(([movies, favoriteIds]) =>
         this.filterMoviesByFavoriteIds(movies, favoriteIds)
@@ -27,7 +38,7 @@ export class FavouriteService {
   }
 
   getFavouriteIcon(movieId: string): Observable<FavouriteIcon> {
-    return this.userService.user$.pipe(
+    return this.userStateService.getUser().pipe(
       map((user) => {
         if (user && user.favouriteMovies.includes(movieId)) {
           return 'favorite';
@@ -39,10 +50,10 @@ export class FavouriteService {
   }
 
   toggleFavourite(movie: Movie) {
-    if (this.userService.isUserFavourite(movie._id)) {
-      this.userService.removeUserFavourite(movie._id).subscribe();
+    if (this.isUserFavourite(movie._id)) {
+      this.removeFavourite(movie._id).subscribe();
     } else {
-      this.userService.addUserFavourite(movie._id).subscribe();
+      this.addFavourite(movie._id).subscribe();
     }
   }
 
@@ -51,5 +62,29 @@ export class FavouriteService {
     favoriteIds: string[]
   ): Observable<Movie[]> {
     return of(movies.filter((movie) => favoriteIds.includes(movie._id)));
+  }
+
+  private isUserFavourite(movieId: string) {
+    return this.userStateService
+      .getCurrentUser()
+      ?.favouriteMovies.includes(movieId);
+  }
+
+  private addFavourite(movieId: string): Observable<any> {
+    return this.userApiService.addFavourite(movieId).pipe(
+      tap((user) => {
+        this.userStateService.setUser(user);
+      }),
+      catchError(this.err.handleError)
+    );
+  }
+
+  private removeFavourite(movieId: string): Observable<any> {
+    return this.userApiService.removeFavourite(movieId).pipe(
+      tap((user) => {
+        this.userStateService.setUser(user);
+      }),
+      catchError(this.err.handleError)
+    );
   }
 }

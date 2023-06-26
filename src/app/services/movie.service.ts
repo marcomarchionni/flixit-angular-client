@@ -1,118 +1,47 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
-} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import {
-  Director,
-  Genre,
-  LoginResponse,
-  Movie,
-  User,
-  UserDetails,
-  LoginCredentials,
-  UserUpdate,
-} from '../common/interfaces';
-
-// Declaring the API url
-const apiUrl = 'https://itflix-api.herokuapp.com/';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Director, Genre } from '../common/interfaces';
+import { ErrorHandling } from '../errors/error-handling';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MovieService {
-  // Inject HttpClient in the constructor
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService, private err: ErrorHandling) {}
 
   getMovies(): Observable<any> {
-    return this.http
-      .get<Movie[]>(apiUrl + 'movies', this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
+    return this.apiService.getMovies().pipe(catchError(this.err.handleError));
   }
 
   getMovie(title: string): Observable<any> {
-    return this.http
-      .get<Movie>(apiUrl + `movies/${title}`, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
+    return this.apiService
+      .getMovie(title)
+      .pipe(catchError(this.err.handleError));
   }
 
   getMoviesByDirector(director: Director) {
-    const encodedDirectorName = encodeURIComponent(director.name);
-    const moviesByDirectorUrl = `${apiUrl}movies/directors/${encodedDirectorName}`;
-    return this.http
-      .get<Movie[]>(moviesByDirectorUrl, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
+    return this.apiService
+      .getMoviesByDirector(director)
+      .pipe(catchError(this.err.handleError));
   }
 
   getMoviesByGenre(genre: Genre) {
-    const encodedGenreName = encodeURIComponent(genre.name);
-    const moviesByDirectorUrl = `${apiUrl}movies/genres/${encodedGenreName}`;
-    return this.http
-      .get<Movie[]>(moviesByDirectorUrl, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
+    return this.apiService
+      .getMoviesByGenre(genre)
+      .pipe(catchError(this.err.handleError));
   }
 
   getDirector(directorName: string): Observable<any> {
-    const encodedName = encodeURIComponent(directorName);
-    return this.http
-      .get<Director>(apiUrl + `directors/${encodedName}`, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
+    return this.apiService
+      .getDirector(directorName)
+      .pipe(catchError(this.err.handleError));
   }
 
   getGenre(genreName: string): Observable<any> {
-    const encodedName = encodeURIComponent(genreName);
-    return this.http
-      .get<Genre>(`${apiUrl}genres/${encodedName}`, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
-  }
-
-  addMovieToFavourites(user: User, movie: Movie): Observable<any> {
-    const encodedUsername = encodeURIComponent(user.username);
-    const encodedMovieId = encodeURIComponent(movie._id);
-    const addToFavouritesUrl = `${apiUrl}users/${encodedUsername}/movies/${encodedMovieId}`;
-    return this.http
-      .put<User>(addToFavouritesUrl, {}, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
-  }
-
-  removeMovieFromFavourites(user: User, movie: Movie): Observable<any> {
-    const encodedUsername = encodeURIComponent(user.username);
-    const encodedMovieId = encodeURIComponent(movie._id);
-    const removeFromFavouritesUrl = `${apiUrl}users/${encodedUsername}/movies/${encodedMovieId}`;
-    return this.http
-      .delete<User>(removeFromFavouritesUrl, this.getAuthHeaders())
-      .pipe(catchError(this.handleError));
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    let message: string;
-    let status: string;
-    console.log(error);
-    if (error.error && error.error.status && error.error.message) {
-      status = `${error.error.status}`;
-      message = error.error.message;
-    } else if (error.status && error.message) {
-      status = `${error.status}`;
-      message = error.message;
-    } else {
-      status = '---';
-      message = 'Unknown error';
-    }
-    console.error(`Error Status: ${status},` + `Error message: ${message}`);
-    return throwError(() => new Error(message));
-  }
-
-  private getAuthHeaders() {
-    const token = localStorage.getItem('token');
-    if (!token) throwError(() => new Error('No token'));
-    return {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + token,
-      }),
-    };
+    return this.apiService
+      .getGenre(genreName)
+      .pipe(catchError(this.err.handleError));
   }
 }
