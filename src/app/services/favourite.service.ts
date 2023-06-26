@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
 import { MovieService } from './movie.service';
-import { Movie } from '../common/interfaces';
-import { Observable, combineLatest, of, switchMap } from 'rxjs';
+import { FavouriteIcon, Movie, User } from '../common/interfaces';
+import { Observable, combineLatest, map, of, startWith, switchMap } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ import { Observable, combineLatest, of, switchMap } from 'rxjs';
 export class FavouriteService {
   constructor(
     private userService: UserService,
-    private movieService: MovieService
+    private movieService: MovieService,
+    private http: HttpClient
   ) {}
 
   getFavoriteMovies(): Observable<Movie[]> {
@@ -22,6 +24,26 @@ export class FavouriteService {
         this.filterMoviesByFavoriteIds(movies, favoriteIds)
       )
     );
+  }
+
+  getFavouriteIcon(movieId: string): Observable<FavouriteIcon> {
+    return this.userService.user$.pipe(
+      map((user) => {
+        if (user && user.favouriteMovies.includes(movieId)) {
+          return 'favorite';
+        }
+        return 'favorite_border';
+      }),
+      startWith('favorite_border' as FavouriteIcon)
+    );
+  }
+
+  toggleFavourite(movie: Movie) {
+    if (this.userService.isUserFavourite(movie._id)) {
+      this.userService.removeUserFavourite(movie._id).subscribe();
+    } else {
+      this.userService.addUserFavourite(movie._id).subscribe();
+    }
   }
 
   private filterMoviesByFavoriteIds(

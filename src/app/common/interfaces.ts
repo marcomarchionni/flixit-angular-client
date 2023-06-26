@@ -68,3 +68,5 @@ export interface AlertContent {
   variant: 'danger' | 'success' | 'warn';
   dismissible?: boolean;
 }
+
+export type FavouriteIcon = 'favorite' | 'favorite_border';

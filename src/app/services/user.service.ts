@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   LoginResponse,
   Movie,
@@ -68,26 +68,44 @@ export class UserService {
       .pipe(catchError(this.err.handleError));
   }
 
+  getUsername() {
+    return this._user$.value?.username;
+  }
+
   getFavouritesIds() {
     return this._user$.pipe(map((user) => (user ? user.favouriteMovies : [])));
   }
 
-  addMovieToFavourites(movie: Movie): Observable<any> {
-    const favouritesUrl = this.getFavouritesUrl(movie._id);
-    return this.http
-      .put<User>(favouritesUrl, {}, this.getAuthHeaders())
-      .pipe(catchError(this.err.handleError));
-  }
-
-  removeMovieFromFavourites(movie: Movie): Observable<any> {
-    const removeFromFavouritesUrl = this.getFavouritesUrl(movie._id);
-    return this.http
-      .delete<User>(removeFromFavouritesUrl, this.getAuthHeaders())
-      .pipe(catchError(this.err.handleError));
-  }
-
   isLoggedIn() {
     return this._user$.pipe(map((user) => !!user));
+  }
+
+  isUserFavourite(movieId: string) {
+    return this._user$.value?.favouriteMovies.includes(movieId);
+  }
+
+  addUserFavourite(movieId: string): Observable<any> {
+    const favouritesUrl = this.getFavouritesUrl(movieId);
+    return this.http.put<User>(favouritesUrl, {}, this.getAuthHeaders()).pipe(
+      tap((user) => {
+        this._user$.next(user);
+        localStorage.setItem('user', JSON.stringify(user));
+      }),
+      catchError(this.err.handleError)
+    );
+  }
+
+  removeUserFavourite(movieId: string): Observable<any> {
+    const removeFromFavouritesUrl = this.getFavouritesUrl(movieId);
+    return this.http
+      .delete<User>(removeFromFavouritesUrl, this.getAuthHeaders())
+      .pipe(
+        tap((user) => {
+          this._user$.next(user);
+          localStorage.setItem('user', JSON.stringify(user));
+        }),
+        catchError(this.err.handleError)
+      );
   }
 
   // updateUser(userUpdate: UserUpdate): Observable<any> {
@@ -107,9 +125,9 @@ export class UserService {
   // }
 
   private getFavouritesUrl(movieId: string) {
-    const user = this._user$.value;
-    if (!user) throw new Error('No user found');
-    const encodedUsername = encodeURIComponent(user.username);
+    const username = this._user$.value?.username;
+    if (!username) throw new Error('No user found');
+    const encodedUsername = encodeURIComponent(username);
     const encodedMovieId = encodeURIComponent(movieId);
     return `${apiUrl}users/${encodedUsername}/movies/${encodedMovieId}`;
   }

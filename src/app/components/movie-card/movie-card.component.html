@@ -5,8 +5,8 @@
   >
   <mat-card-actions class="movie-card__action">
     <button mat-icon-button color="accent"><mat-icon>info</mat-icon></button>
-    <button mat-icon-button color="accent">
-      <mat-icon>favorite_border</mat-icon>
+    <button mat-icon-button color="accent" (click)="toggleFavourite()">
+      <mat-icon>{{ (favouriteIcon$ | async) ?? "favorite_border" }}</mat-icon>
     </button>
   </mat-card-actions>
 </mat-card>
