@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Director, Genre } from '../common/interfaces';
+import { catchError, filter, map } from 'rxjs/operators';
+import { Director, Genre, Movie } from '../common/interfaces';
 import { ErrorHandling } from '../errors/error-handling';
 import { ApiService } from './api.service';
 
@@ -19,6 +19,16 @@ export class MovieService {
     return this.apiService
       .getMovie(title)
       .pipe(catchError(this.err.handleError));
+  }
+
+  getMovieById(movieId: string) {
+    return this.apiService.getMovies().pipe(
+      map((movies: Movie[]) => {
+        const movie = movies.find((movie) => movie._id === movieId);
+        if (!movie) throw new Error('Movie not found');
+        return movie;
+      })
+    );
   }
 
   getMoviesByDirector(director: Director) {

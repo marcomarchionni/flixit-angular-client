@@ -28,6 +28,7 @@ import { MovieService } from './services/movie.service';
 import { UserService } from './services/user.service';
 import { StateService } from './services/state.service';
 import { ApiService } from './services/api.service';
+import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-page.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ApiService } from './services/api.service';
     MovieCardComponent,
     MoviesPageComponent,
     FavouritesPageComponent,
+    MovieInfoPageComponent,
   ],
   imports: [
     BrowserModule,

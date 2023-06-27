@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FavouriteIcon, Movie } from 'src/app/common/interfaces';
 import { FavouriteService } from 'src/app/services/favourite.service';
@@ -12,7 +13,10 @@ export class MovieCardComponent implements OnInit {
   @Input() movie!: Movie;
   favouriteIcon$: Observable<FavouriteIcon> | undefined;
 
-  constructor(private favouriteService: FavouriteService) {}
+  constructor(
+    private favouriteService: FavouriteService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.favouriteIcon$ = this.favouriteService.getFavouriteIcon(
@@ -22,5 +26,9 @@ export class MovieCardComponent implements OnInit {
 
   toggleFavourite() {
     this.favouriteService.toggleFavourite(this.movie);
+  }
+
+  goToInfo() {
+    this.router.navigateByUrl('movies/' + this.movie._id);
   }
 }

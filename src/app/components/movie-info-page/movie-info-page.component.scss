@@ -1,0 +1,53 @@
+.movie-info-page-container {
+  padding-top: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+.movie-info-card-container {
+  display: flex;
+}
+
+.movie-info__title h1 {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+// .movie-info-card-image {
+// }
+
+.movie-info-table {
+  text-align: left;
+  // margin-top: 1rem;
+
+  // padding-left: 1rem;
+}
+
+.movie-info__description {
+  margin: 0;
+}
+
+.movie-info-table th {
+  padding-right: 1rem;
+}
+
+.movie-info__header {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-info__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.movie-info__content-item {
+  flex: 1 1 0;
+  padding: 1rem;
+}
+
+// .movie-info__description {
+//   margin-top: 0;
+// }

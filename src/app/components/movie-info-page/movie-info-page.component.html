@@ -1,0 +1,51 @@
+<div class="movie-info-page-container">
+  <mat-card>
+    <img
+      mat-card-image
+      class="movie-info__-image"
+      src="{{ movie.photoUrl }}"
+      alt="{{ movie.title }}"
+    />
+    <div>
+      <mat-card-header class="movie-info__header">
+        <mat-card-title class="movie-info__title"
+          ><h1>{{ movie.title }}</h1></mat-card-title
+        >
+        <button mat-icon-button color="accent" (click)="toggleFavourite()">
+          <mat-icon>{{
+            (favouriteIcon$ | async) ?? "favorite_border"
+          }}</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content class="movie-info__content">
+        <table class="movie-info-table movie-info__content-item">
+          <tbody>
+            <tr>
+              <th>Original Title</th>
+              <td>{{ movie.originalTitle }}</td>
+            </tr>
+            <tr>
+              <th>Director</th>
+              <td>{{ movie.director.name }}</td>
+            </tr>
+            <tr>
+              <th>Stars</th>
+              <td>{{ movie.title }}</td>
+            </tr>
+            <tr>
+              <th>Genre</th>
+              <td>{{ movie.genre.name }}</td>
+            </tr>
+            <tr>
+              <th>Year</th>
+              <td>{{ movie.year }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="movie-info__content-item">
+          <p class="movie-info__description">{{ movie.description }}</p>
+        </div>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

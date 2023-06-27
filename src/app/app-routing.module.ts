@@ -6,6 +6,7 @@ import { SignupPageComponent } from './components/signup-page/signup-page.compon
 import { loggedOutGuard } from './guards/logged-out.guard';
 import { MoviesPageComponent } from './components/movies-page/movies-page.component';
 import { FavouritesPageComponent } from './components/favourites-page/favourites-page.component';
+import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-page.component';
 
 const appRoutes: Routes = [
   {
@@ -17,6 +18,11 @@ const appRoutes: Routes = [
     path: 'signup',
     component: SignupPageComponent,
     canActivate: [loggedOutGuard],
+  },
+  {
+    path: 'movies/:movieId',
+    component: MovieInfoPageComponent,
+    canActivate: [loggedInGuard],
   },
   {
     path: 'movies',

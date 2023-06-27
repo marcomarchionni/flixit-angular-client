@@ -1,10 +1,12 @@
 <mat-card *ngIf="movie" class="movie-card">
-  <img src="{{ movie.posterUrl }}" alt="{{ movie.title }}" />
+  <img mat-card-image src="{{ movie.posterUrl }}" alt="{{ movie.title }}" />
   <mat-card-title class="movie-card__title"
     ><h2>{{ movie.title }}</h2></mat-card-title
   >
   <mat-card-actions class="movie-card__action">
-    <button mat-icon-button color="accent"><mat-icon>info</mat-icon></button>
+    <button mat-icon-button color="accent" (click)="goToInfo()">
+      <mat-icon>info</mat-icon>
+    </button>
     <button mat-icon-button color="accent" (click)="toggleFavourite()">
       <mat-icon>{{ (favouriteIcon$ | async) ?? "favorite_border" }}</mat-icon>
     </button>
