@@ -10,14 +10,14 @@ import { MovieService } from 'src/app/services/movie.service';
 export class MoviesPageComponent implements OnInit {
   movies: Movie[] = [];
 
-  constructor(public fetchApiData: MovieService) {}
+  constructor(public movieService: MovieService) {}
 
   ngOnInit() {
     this.getMovies();
   }
 
   getMovies() {
-    this.fetchApiData.getMovies().subscribe((data) => {
+    this.movieService.getMovies().subscribe((data) => {
       this.movies = data;
     });
   }
