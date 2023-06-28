@@ -43,7 +43,14 @@
         </mat-form-field>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button type="submit" color="primary">Sign Up</button>
+        <button
+          mat-raised-button
+          type="submit"
+          color="accent"
+          [disabled]="!signupForm.valid"
+        >
+          Sign Up
+        </button>
       </mat-card-actions>
     </mat-card>
   </form>

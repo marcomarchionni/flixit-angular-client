@@ -1,8 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieService } from '../../services/movie.service';
 import { UserDetails } from '../../common/interfaces';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  Validators,
+} from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,6 +16,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./signup-page.component.scss'],
 })
 export class SignupPageComponent {
+  @ViewChild(FormGroupDirective) formGroupDirective!: FormGroupDirective;
+
   signupForm = new FormGroup({
     username: new FormControl('', [
       Validators.required,
@@ -29,18 +36,30 @@ export class SignupPageComponent {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.userService.signup(this.signupForm.value as UserDetails).subscribe({
+    const userDetails: UserDetails = this.getUserDetails(this.signupForm.value);
+    this.userService.signup(userDetails).subscribe({
       next: (response) => {
         console.log(response);
         // TODO: logic for user registration
         this.snackBar.open('User registration successful!', 'OK', {
           duration: 2000,
         });
+        this.signupForm.reset();
+        this.formGroupDirective.resetForm();
       },
       error: (error) => {
         console.log(error);
         this.snackBar.open(error, 'OK', { duration: 5000 });
       },
     });
+  }
+
+  private getUserDetails(formValue: any): UserDetails {
+    return {
+      username: formValue.username!,
+      password: formValue.password!,
+      email: formValue.email!,
+      birthday: formValue.birthday || undefined,
+    };
   }
 }
