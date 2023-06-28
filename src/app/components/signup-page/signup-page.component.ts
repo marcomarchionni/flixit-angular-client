@@ -1,14 +1,13 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MovieService } from '../../services/movie.service';
-import { UserDetails } from '../../common/interfaces';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   FormGroupDirective,
   Validators,
 } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/services/user.service';
+import { UserDetails } from '../../common/interfaces';
 
 @Component({
   selector: 'app-signup-page',

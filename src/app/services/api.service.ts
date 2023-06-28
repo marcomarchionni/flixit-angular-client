@@ -1,17 +1,16 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { apiUrl } from '../common/constants';
 import {
   Director,
   Genre,
   LoginCredentials,
   LoginResponse,
   Movie,
-  MovieEntity,
   User,
   UserDetails,
 } from '../common/interfaces';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { apiUrl } from '../common/constants';
 import { StateService } from './state.service';
 
 @Injectable({
