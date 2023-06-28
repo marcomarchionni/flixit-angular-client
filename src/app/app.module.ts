@@ -29,6 +29,7 @@ import { UserService } from './services/user.service';
 import { StateService } from './services/state.service';
 import { ApiService } from './services/api.service';
 import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-page.component';
+import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-
     MoviesPageComponent,
     FavouritesPageComponent,
     MovieInfoPageComponent,
+    InfoDialogComponent,
   ],
   imports: [
     BrowserModule,

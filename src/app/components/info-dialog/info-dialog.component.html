@@ -1,0 +1,19 @@
+<mat-card
+  ><mat-card-header class="dialog-header"
+    ><mat-card-title
+      ><h2 class="dialog-title">{{ entity.name }}</h2></mat-card-title
+    >
+    <mat-card-subtitle class="dialog-subtitle"
+      ><ng-container *ngIf="entity.born && entity.died">
+        ({{ entity.born | date : "d MMMM yyyy" }} -
+        {{ entity.died | date : "d MMMM yyyy" }})
+      </ng-container>
+      <ng-container *ngIf="entity.born && !entity.died">
+        (born {{ entity.born | date : "d MMMM yyyy" }})
+      </ng-container></mat-card-subtitle
+    >
+  </mat-card-header>
+  <mat-card-content class="dialog-content">
+    <p>{{ entity.bio || entity.description }}</p>
+  </mat-card-content>
+</mat-card>

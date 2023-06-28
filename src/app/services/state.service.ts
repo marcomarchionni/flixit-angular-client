@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
-import { Movie, User } from '../common/interfaces';
 import { HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
+import { User } from '../common/interfaces';
 
 @Injectable({
   providedIn: 'root',

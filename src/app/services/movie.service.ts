@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, map, shareReplay } from 'rxjs/operators';
-import { Director, Genre, Movie } from '../common/interfaces';
+import { catchError, map, shareReplay } from 'rxjs/operators';
+import { Movie, MovieEntity } from '../common/interfaces';
 import { ErrorHandling } from '../errors/error-handling';
 import { ApiService } from './api.service';
 
@@ -42,13 +42,13 @@ export class MovieService {
     );
   }
 
-  getMoviesByDirector(director: Director) {
+  getMoviesByDirector(director: MovieEntity) {
     return this.apiService
       .getMoviesByDirector(director)
       .pipe(catchError(this.err.handleError));
   }
 
-  getMoviesByGenre(genre: Genre) {
+  getMoviesByGenre(genre: MovieEntity) {
     return this.apiService
       .getMoviesByGenre(genre)
       .pipe(catchError(this.err.handleError));

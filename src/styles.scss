@@ -22,6 +22,9 @@ $flixit-angular-client-accent: mat.define-palette(
 // The warn palette is optional (defaults to red).
 $flixit-angular-client-warn: mat.define-palette(mat.$red-palette);
 
+// Color for anchor links
+$flixit-angular-client-anchor: mat.define-palette(mat.$blue-palette);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $flixit-angular-client-theme: mat.define-dark-theme(
@@ -30,6 +33,7 @@ $flixit-angular-client-theme: mat.define-dark-theme(
       primary: $flixit-angular-client-primary,
       accent: $flixit-angular-client-accent,
       warn: $flixit-angular-client-warn,
+      anchor: $flixit-angular-client-anchor,
     ),
   )
 );
@@ -50,6 +54,14 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+a {
+  color: mat.get-color-from-palette($flixit-angular-client-anchor);
+}
+
+a:hover {
+  cursor: pointer;
+}
+
 /* Forms */
 
 .form-container {
@@ -68,9 +80,9 @@ body {
   display: flex !important;
 }
 
-.form-anchor {
-  color: mat.get-color-from-palette($flixit-angular-client-accent, "lighter");
-}
+// .form-anchor {
+//   color: mat.get-color-from-palette($flixit-angular-client-accent, "lighter");
+// }
 
 .form-card-footer {
   line-height: 1.5rem;

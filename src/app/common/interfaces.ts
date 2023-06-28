@@ -1,21 +1,16 @@
-export interface Director {
+export interface MovieEntity {
   name: string;
   born?: Date;
   died?: Date;
   bio?: string;
+  description?: string;
 }
 
-export interface Genre {
-  name: string;
-  description: string;
-}
+export interface Director extends MovieEntity {}
 
-export interface Star {
-  name: string;
-  born?: Date;
-  died?: Date;
-  bio?: string;
-}
+export interface Star extends MovieEntity {}
+
+export interface Genre extends MovieEntity {}
 
 export interface Movie {
   _id: string;

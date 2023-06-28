@@ -26,15 +26,34 @@
             </tr>
             <tr>
               <th>Director</th>
-              <td>{{ movie.director.name }}</td>
+              <td>
+                <a (click)="openInfoDialog(movie.director)">{{
+                  movie.director.name
+                }}</a>
+              </td>
             </tr>
             <tr>
               <th>Stars</th>
-              <td>{{ movie.title }}</td>
+              <td>
+                <ng-container
+                  *ngFor="
+                    let star of movie.stars;
+                    let last = last;
+                    let i = index
+                  "
+                >
+                  <a (click)="openInfoDialog(star)">{{ star.name }}</a>
+                  <span *ngIf="!last">, </span>
+                </ng-container>
+              </td>
             </tr>
             <tr>
               <th>Genre</th>
-              <td>{{ movie.genre.name }}</td>
+              <td>
+                <a (click)="openInfoDialog(movie.genre)">{{
+                  movie.genre.name
+                }}</a>
+              </td>
             </tr>
             <tr>
               <th>Year</th>

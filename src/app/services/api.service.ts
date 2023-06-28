@@ -6,6 +6,7 @@ import {
   LoginCredentials,
   LoginResponse,
   Movie,
+  MovieEntity,
   User,
   UserDetails,
 } from '../common/interfaces';
@@ -39,7 +40,7 @@ export class ApiService {
     return this.http.put<User>(favouritesUrl, {}, authHeaders);
   }
 
-  removeFavourite(movieId: string): Observable<any> {
+  removeFavourite(movieId: string): Observable<User> {
     const removeFromFavouritesUrl = this.getFavouritesUrl(movieId);
     const authHeaders = this.getAuthHeaders();
     return this.http.delete<User>(removeFromFavouritesUrl, authHeaders);

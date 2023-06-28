@@ -1,7 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { FavouriteIcon, Movie } from 'src/app/common/interfaces';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { FavouriteIcon, Movie, MovieEntity } from 'src/app/common/interfaces';
+import { InfoDialogComponent } from 'src/app/components/info-dialog/info-dialog.component';
 import { FavouriteService } from 'src/app/services/favourite.service';
 import { MovieService } from 'src/app/services/movie.service';
 
@@ -16,6 +18,7 @@ export class MovieInfoPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private dialog: MatDialog,
     private favouriteService: FavouriteService,
     private movieService: MovieService
   ) {}
@@ -33,5 +36,12 @@ export class MovieInfoPageComponent implements OnInit {
 
   toggleFavourite() {
     this.favouriteService.toggleFavourite(this.movie);
+  }
+
+  openInfoDialog<T extends MovieEntity>(entity: T) {
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '300px',
+      data: { entity },
+    });
   }
 }
