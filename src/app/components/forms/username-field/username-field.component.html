@@ -1,0 +1,15 @@
+<mat-form-field class="form-field">
+  <input
+    matInput
+    [formControl]="usernameControl"
+    placeholder="Username"
+    type="text"
+    name="Username"
+  />
+  <mat-error *ngIf="usernameControl.hasError('required')">
+    <small>Username is required</small>
+  </mat-error>
+  <mat-error *ngIf="usernameControl.hasError('minlength')">
+    <small>Must be at least 4 characters</small>
+  </mat-error>
+</mat-form-field>

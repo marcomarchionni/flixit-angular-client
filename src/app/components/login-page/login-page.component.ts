@@ -11,16 +11,11 @@ import { LoginCredentials, LoginResponse } from '../../common/interfaces';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent {
+  usernameControl = new FormControl('');
+  passwordControl = new FormControl('');
   loginForm = new FormGroup({
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-    ]),
-
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-    ]),
+    username: this.usernameControl,
+    password: this.passwordControl,
   });
 
   constructor(
@@ -34,6 +29,7 @@ export class LoginPageComponent {
       username: this.loginForm.value.username!,
       password: this.loginForm.value.password!,
     };
+    console.log({ loginCredentials });
     this.userService.login(loginCredentials).subscribe({
       next: (response: LoginResponse) => {
         console.log({ response });

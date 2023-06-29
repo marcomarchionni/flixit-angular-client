@@ -30,6 +30,8 @@ import { StateService } from './services/state.service';
 import { ApiService } from './services/api.service';
 import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-page.component';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+import { UsernameFieldComponent } from './components/forms/username-field/username-field.component';
+import { PasswordFieldComponent } from './components/forms/password-field/password-field.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
     FavouritesPageComponent,
     MovieInfoPageComponent,
     InfoDialogComponent,
+    UsernameFieldComponent,
+    PasswordFieldComponent,
   ],
   imports: [
     BrowserModule,
