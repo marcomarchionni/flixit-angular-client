@@ -1,3 +1,5 @@
+![FlixIt screenshot](/src/assets/images/flixit-angular-client-screenshot.png)
+
 # FlixIt Angular Client
 
 ## Overview
@@ -45,4 +47,4 @@ Check out the live version of the FlixIt Angular client [here](https://marcomarc
 
 ## Documentation
 
-The project's documentation, generated with TypeDoc, is available here: [your link here]
+The project's documentation, generated with TypeDoc, is available [here](https://marcomarchionni.github.io/flixit-angular-client/docs/)
