@@ -5,6 +5,19 @@ import { Movie, MovieEntity } from '../common/interfaces';
 import { ErrorHandling } from '../errors/error-handling';
 import { ApiService } from './api.service';
 
+/**
+ * The MovieService is a service that provides functions to fetch information about
+ * movies, directors, and genres. It works with the ApiService to make the necessary
+ * API calls and uses the ErrorHandling service to handle any errors that occur during
+ * these API requests.
+ *
+ * The service uses RxJS's shareReplay operator to ensure that multiple subscriptions
+ * to the Observable of movies don't result in multiple API requests. It also leverages
+ * RxJS's catchError operator to provide a graceful error handling mechanism.
+ *
+ * @see ApiService
+ * @see ErrorHandling
+ */
 @Injectable({
   providedIn: 'root',
 })

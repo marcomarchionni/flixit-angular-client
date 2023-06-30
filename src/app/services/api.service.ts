@@ -11,15 +11,24 @@ import {
   User,
   UserDetails,
 } from '../common/interfaces';
-import { StateService } from './state.service';
+import { AuthStateService } from './auth-state.service';
 
+/**
+ * ApiService is a service responsible for handling all API requests to the backend.
+ * It contains methods to log in, sign up, manage favourites, and get movie data.
+ *
+ * Each method returns an Observable, which will be subscribed to in the components.
+ *
+ * @see HttpClient
+ * @see Observable
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
   constructor(
     private http: HttpClient,
-    private userStateService: StateService
+    private userStateService: AuthStateService
   ) {}
 
   login(credentials: LoginCredentials): Observable<LoginResponse> {
@@ -76,7 +85,7 @@ export class ApiService {
     );
   }
 
-  getGenre(genreName: string): Observable<any> {
+  getGenre(genreName: string): Observable<Genre> {
     const encodedName = encodeURIComponent(genreName);
     return this.http.get<Genre>(
       `${apiUrl}genres/${encodedName}`,

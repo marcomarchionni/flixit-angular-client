@@ -13,8 +13,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SignupPageComponent } from './components/signup-page/signup-page.component';
-import { LoginPageComponent } from './components/login-page/login-page.component';
+import { SignupPageComponent } from './pages/signup-page/signup-page.component';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { MovieGridComponent } from './components/movie-grid/movie-grid.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -22,13 +22,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
-import { MoviesPageComponent } from './components/movies-page/movies-page.component';
-import { FavouritesPageComponent } from './components/favourites-page/favourites-page.component';
+import { MoviesPageComponent } from './pages/movies-page/movies-page.component';
+import { FavouritesPageComponent } from './pages/favourites-page/favourites-page.component';
 import { MovieService } from './services/movie.service';
 import { UserService } from './services/user.service';
-import { StateService } from './services/state.service';
+import { AuthStateService } from './services/auth-state.service';
 import { ApiService } from './services/api.service';
-import { MovieInfoPageComponent } from './components/movie-info-page/movie-info-page.component';
+import { MovieInfoPageComponent } from './pages/movie-info-page/movie-info-page.component';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
 
 @NgModule({
@@ -62,7 +62,7 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
     MatToolbarModule,
     MatMenuModule,
   ],
-  providers: [MovieService, UserService, StateService, ApiService],
+  providers: [MovieService, UserService, AuthStateService, ApiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

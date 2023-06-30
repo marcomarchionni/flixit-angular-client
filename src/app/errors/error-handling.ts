@@ -2,6 +2,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 
+/**
+ * The ErrorHandling service handles HTTP errors across the application.
+ * This service offers a single method, handleError(), which accepts an error object of
+ * type HttpErrorResponse.
+ *
+ * The handleError() method then extracts the error status and message, it logs the error
+ * details to the console and throws a new Error with the message.
+ *
+ * @see HttpErrorResponse
+ */
 @Injectable({
   providedIn: 'root',
 })

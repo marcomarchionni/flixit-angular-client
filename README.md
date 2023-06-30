@@ -1,27 +1,48 @@
-# FlixitAngularClient
+# FlixIt Angular Client
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+## Overview
 
-## Development server
+FlixIt is a web application that provides access to information about movies from the Golden Age of Italian Cinema (1960-1980). This version of the FlixIt client is built using Angular and written in TypeScript. It is connected to a Node-Express backend and a MongoDB database.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Main Features
 
-## Code scaffolding
+The FlixIt Angular client offers the following features:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- User registration with username, email, birthday, and password.
+- User login using a username and password.
+- Display of a list of all movies.
+- Detailed view of individual movies.
+- Access to information about directors, stars and movie genres
+- Ability to add or remove movies from the user's list of favorites.
+- Display of the user's list of favorite movies.
 
-## Build
+## Tech Stack
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+The FlixIt Angular client utilizes the following technologies:
 
-## Running unit tests
+- JavaScript
+- TypeScript
+- HTML
+- SCSS
+- Angular
+- Angular Material
+- Angular-Router
+- RxJS
+- TypeDoc (for documentation)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+To install the project:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone the repository: `git clone https://github.com/yourusername/flixit-angular.git`
+2. Install the dependencies: `npm install`
+3. Start the project: `ng serve`
+4. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Further help
+## Live App
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Check out the live version of the FlixIt Angular client [here](https://marcomarchionni.github.io/flixit-angular-client/)
+
+## Documentation
+
+The project's documentation, generated with TypeDoc, is available here: [your link here]

@@ -3,12 +3,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { InfoDialogComponent } from './info-dialog.component';
 
 describe('InfoDialogComponent', () => {
-  let component: InfoDialogComponent;
-  let fixture: ComponentFixture<InfoDialogComponent>;
+  let component: InfoDialogComponent<any>;
+  let fixture: ComponentFixture<InfoDialogComponent<any>>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [InfoDialogComponent]
+      declarations: [InfoDialogComponent],
     });
     fixture = TestBed.createComponent(InfoDialogComponent);
     component = fixture.componentInstance;

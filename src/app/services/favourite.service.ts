@@ -13,14 +13,29 @@ import { FavouriteIcon, Movie } from '../common/interfaces';
 import { ErrorHandling } from '../errors/error-handling';
 import { MovieService } from './movie.service';
 import { ApiService } from './api.service';
-import { StateService } from './state.service';
+import { AuthStateService } from './auth-state.service';
 
+/**
+ * The FavouriteService is a service that handles user favorites. It provides functions
+ * to get all favorite movies of a user, toggle (add or remove) a favorite movie, and
+ * get the favorite icon state (filled or outlined) for a specific movie.
+ *
+ * It leverages services such as the MovieService, ApiService and AuthStateService
+ * to fetch movies, interact with the API and manage the state of user authentication
+ * respectively. It also makes use of the ErrorHandling service for handling any errors
+ * that may occur during API requests.
+ *
+ * @see MovieService
+ * @see ApiService
+ * @see AuthStateService
+ * @see ErrorHandling
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class FavouriteService {
   constructor(
-    private userStateService: StateService,
+    private userStateService: AuthStateService,
     private movieService: MovieService,
     private userApiService: ApiService,
     private err: ErrorHandling
