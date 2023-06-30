@@ -45,6 +45,6 @@ To install the project:
 
 Check out the live version of the FlixIt Angular client [here](https://marcomarchionni.github.io/flixit-angular-client/)
 
-## Documentation
+<!-- ## Documentation
 
-The project's documentation, generated with TypeDoc, is available [here](https://marcomarchionni.github.io/flixit-angular-client/docs/)
+The project's documentation, generated with TypeDoc, is available [here](https://marcomarchionni.github.io/flixit-angular-client/docs/) -->

@@ -41,7 +41,8 @@ const appRoutes: Routes = [
     component: FavouritesPageComponent,
     canActivate: [loggedInGuard],
   },
-  { path: '', redirectTo: 'movies', pathMatch: 'prefix' },
+  { path: '', redirectTo: 'movies', pathMatch: 'full' },
+  { path: '**', redirectTo: 'movies' },
 ];
 
 @NgModule({
