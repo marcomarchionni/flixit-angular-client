@@ -28,7 +28,7 @@ import { AuthStateService } from './auth-state.service';
 export class ApiService {
   constructor(
     private http: HttpClient,
-    private userStateService: AuthStateService
+    private authStateService: AuthStateService
   ) {}
 
   login(credentials: LoginCredentials): Observable<LoginResponse> {
@@ -94,7 +94,7 @@ export class ApiService {
   }
 
   private getFavouritesUrl(movieId: string) {
-    const user = this.userStateService.getCurrentUser();
+    const user = this.authStateService.getCurrentUser();
     if (!user) throw new Error('No user found');
     const encodedUsername = encodeURIComponent(user.username);
     const encodedMovieId = encodeURIComponent(movieId);
@@ -102,7 +102,7 @@ export class ApiService {
   }
 
   private getAuthHeaders() {
-    const token = this.userStateService.getToken();
+    const token = this.authStateService.getToken();
     if (!token) throw new Error('No token');
     return {
       headers: new HttpHeaders({

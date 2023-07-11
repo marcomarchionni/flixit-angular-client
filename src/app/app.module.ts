@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -30,6 +30,7 @@ import { AuthStateService } from './services/auth-state.service';
 import { ApiService } from './services/api.service';
 import { MovieInfoPageComponent } from './pages/movie-info-page/movie-info-page.component';
 import { InfoDialogComponent } from './components/info-dialog/info-dialog.component';
+import { GlobalHttpInterceptorService } from './services/global-http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,17 @@ import { InfoDialogComponent } from './components/info-dialog/info-dialog.compon
     MatToolbarModule,
     MatMenuModule,
   ],
-  providers: [MovieService, UserService, AuthStateService, ApiService],
+  providers: [
+    MovieService,
+    UserService,
+    AuthStateService,
+    ApiService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: GlobalHttpInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

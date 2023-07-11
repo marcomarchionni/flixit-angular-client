@@ -51,7 +51,6 @@ export class LoginPageComponent {
     };
     this.userService.login(loginCredentials).subscribe({
       next: (response: LoginResponse) => {
-        console.log({ response });
         this.snackBar.open('User login successful!', 'OK', {
           duration: 5000,
         });

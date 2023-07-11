@@ -23,14 +23,17 @@ import { ApiService } from './api.service';
 })
 export class MovieService {
   private movies$: Observable<Movie[]> | undefined;
+  private triggerRefresh: boolean = false;
 
   constructor(private apiService: ApiService, private err: ErrorHandling) {}
 
   getMovies(): Observable<Movie[]> {
-    if (!this.movies$) {
+    if (this.triggerRefresh || this.movies$ === undefined) {
+      this.triggerRefresh = false;
       this.movies$ = this.apiService.getMovies().pipe(
         shareReplay({ bufferSize: 1, refCount: true }),
         catchError((err) => {
+          this.triggerRefresh = true;
           this.err.handleError(err);
           return of([] as Movie[]);
         })
