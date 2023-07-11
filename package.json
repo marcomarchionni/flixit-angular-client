@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "docs": "typedoc --out docs --exclude **/*.spec.ts --excludeExternals --excludePrivate --excludeProtected --name 'Flixit Angular Client' --entryPointStrategy expand ./src"
+    "docs": "typedoc --out docs --exclude **/*.spec.ts --excludeExternals --excludePrivate --excludeProtected --name 'Flixit Angular Client' --entryPointStrategy expand ./src",
+    "deploy": "ng deploy --base-href=/flixit-angular-client/"
   },
   "private": true,
   "dependencies": {
